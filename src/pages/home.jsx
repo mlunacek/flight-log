@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { atomWithStorage } from 'jotai/utils';
 import { atom, useAtom, useAtomValue } from 'jotai';
 
-import { Box, Button, Typography, Link } from '@mui/material';
+import { Box, Button, Typography, Link, Divider } from '@mui/material';
 
 import { flightLogSummaryAtom, isLoggedInAtom } from '../auth/atoms';
 
@@ -15,7 +15,9 @@ import {
 } from './summary-table';
 
 import { RowsSummaryTable } from './rows-summary-table';
-import { getRollingRows, getYTDRows, computeTotals, summarizeByYear } from './utils'
+import { getRollingRows, summarizeByYear } from './utils'
+import HoursHeatmapMUI from './monthly-hours-heatmap';
+import CumulativeHoursHeatmapMUI from './cumulative-hours-heatmap'
 
 const HomePage = () => {
 
@@ -48,6 +50,8 @@ const HomePage = () => {
         )
     }
 
+    console.log(summary)
+
 
     return (
         <Box>
@@ -57,6 +61,12 @@ const HomePage = () => {
             <RowsSummaryTable rows={last12Months} title="Last 12 Months" />
             <RowsSummaryTable rows={yearTotals} title="Year Totals" />
 
+            <Box paddingTop={2}>
+                <HoursHeatmapMUI data={summary} />
+            </Box>
+            <Box paddingTop={2}>
+                <CumulativeHoursHeatmapMUI data={summary} />
+            </Box>
 
             <Box>
                 <pre>{stored ? JSON.stringify(stored, null, 2) : "No data yet. Click Refresh."}</pre>
