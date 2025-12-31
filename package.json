@@ -2,7 +2,7 @@
   "name": "flight-log",
   "homepage": "https://mlunacek.github.io/flight-log/",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "start": "vite",

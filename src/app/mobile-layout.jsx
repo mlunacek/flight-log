@@ -34,7 +34,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import MergeIcon from "@mui/icons-material/CallMerge";
 
 import { useLogout } from "../auth/use-logout";
-import { useFlightLogSummaryManual, userEmailAtom } from '../auth/atoms';
+import { useFlightLogSummaryManual, userEmailAtom, isLoggedInAtom } from '../auth/atoms';
 
 
 export default function MobileLayout() {
@@ -42,6 +42,7 @@ export default function MobileLayout() {
     const { pathname } = useLocation();
 
     const isAbout = pathname === "/about";
+    const isLoggedIn = useAtomValue(isLoggedInAtom);
 
 
     const toggleDrawer = (nextOpen) => () => setOpen(nextOpen);
@@ -76,7 +77,7 @@ export default function MobileLayout() {
                 <ListItem disablePadding>
                     <ListItemButton
                         component="a"
-                        href={"/"}
+                        href={`${import.meta.env.BASE_URL}`}
                     >
                         <ListItemIcon>
                             <BarChartOutlinedIcon />
@@ -88,7 +89,7 @@ export default function MobileLayout() {
                 <ListItem disablePadding>
                     <ListItemButton
                         component="a"
-                        href={"/flights"}
+                        href={`${import.meta.env.BASE_URL}flights`}
                     >
                         <ListItemIcon>
                             <ParaglidingIcon />
@@ -100,7 +101,7 @@ export default function MobileLayout() {
                 <ListItem disablePadding>
                     <ListItemButton
                         component="a"
-                        href={"/about"}
+                        href={`${import.meta.env.BASE_URL}about`}
                     >
                         <ListItemIcon>
                             <InfoOutlinedIcon />
@@ -114,7 +115,7 @@ export default function MobileLayout() {
 
                 <ListItem disablePadding>
                     <ListItemButton
-                        disabled={isAbout}
+                        disabled={isAbout || !isLoggedIn}
                         onClick={handlePostClick}
                     >
                         <ListItemIcon>
@@ -126,7 +127,7 @@ export default function MobileLayout() {
 
                 <ListItem disablePadding>
                     <ListItemButton
-                        disabled={isAbout}
+                        disabled={isAbout || !isLoggedIn}
                         onClick={handleMergeClick}
                     >
                         <ListItemIcon>
@@ -136,30 +137,34 @@ export default function MobileLayout() {
                     </ListItemButton>
                 </ListItem>
 
-                <Divider />
 
-                <ListItem disablePadding>
-                    <ListItemButton
-                        onClick={logout}
-                    >
-                        <ListItemIcon>
-                            <LogoutOutlinedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Logout"} />
-                    </ListItemButton>
-                </ListItem>
+                {isLoggedIn &&
+                    <>
+                        <Divider />
 
-                <ListItem disablePadding>
-                    <ListItemButton disabled>
-                        <ListItemIcon>
-                            <PersonIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={email?.slice(0, -10)} />
-                    </ListItemButton>
-                </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton
+                                onClick={logout}
+                            >
+                                <ListItemIcon>
+                                    <LogoutOutlinedIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Logout"} />
+                            </ListItemButton>
+                        </ListItem>
 
+                        <ListItem disablePadding>
+                            <ListItemButton disabled>
+                                <ListItemIcon>
+                                    <PersonIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={email?.slice(0, -10)} />
+                            </ListItemButton>
+                        </ListItem>
+                    </>
+                }
             </List>
-        </Box>
+        </Box >
     );
 
     return (
@@ -181,7 +186,7 @@ export default function MobileLayout() {
 
                     <Typography variant="subtitle2" noWrap>
                         {/* {email} */}
-                        V 0.1
+                        v{__APP_VERSION__}
                     </Typography>
                 </Toolbar>
                 {isBusy && <LinearProgress />}

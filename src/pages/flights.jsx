@@ -22,12 +22,6 @@ const FlightsPage = () => {
 
     const stored = useAtomValue(flightLogSummaryAtom);
     const isLoggedIn = useAtomValue(isLoggedInAtom);
-    const [lastFlights, setLastFlights] = useState([]);
-
-    useEffect(() => {
-        if (!stored?.lastFlights) return;
-        setLastFlights(stored?.lastFlights)
-    }, [stored?.lastFlights])
 
 
     if (!isLoggedIn) {
@@ -36,10 +30,9 @@ const FlightsPage = () => {
         )
     }
 
-
     return (
         <Box>
-            <pre>{lastFlights ? JSON.stringify(lastFlights, null, 2) : "No data yet. Click Refresh."}</pre>
+            <pre>{stored?.lastFlights ? JSON.stringify(stored?.lastFlights, null, 2) : "No data yet. Click Refresh."}</pre>
         </Box>
 
     )

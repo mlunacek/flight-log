@@ -50,9 +50,15 @@ function App() {
 
             <Routes>
               <Route element={<MobileLayout />}>
-                <Route path={`${import.meta.env.BASE_URL}`} element={<HomePage />} />
+
+                <Route path={`/`} element={<HomePage />} />
+                <Route path={`/flights`} element={<FlightsPage />} />
+                <Route path={`/about`} element={<AboutPage />} />
+
+                {/* <Route path={`${import.meta.env.BASE_URL}`} element={<HomePage />} />
                 <Route path={`${import.meta.env.BASE_URL}flights`} element={<FlightsPage />} />
-                <Route path={`${import.meta.env.BASE_URL}about`} element={<AboutPage />} />
+                <Route path={`${import.meta.env.BASE_URL}about`} element={<AboutPage />} /> */}
+
               </Route>
             </Routes>
 
