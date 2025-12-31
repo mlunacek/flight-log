@@ -32,10 +32,6 @@ export function SummaryTable({ summary, title = "Summary", }) {
 
     }, [summary])
 
-
-    console.log(total)
-    console.log(ytd)
-
     return (
         <Paper
             elevation={2}

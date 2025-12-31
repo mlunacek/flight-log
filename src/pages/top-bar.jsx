@@ -8,6 +8,7 @@ import {
     Button,
     Typography,
     Box,
+    LinearProgress
 } from "@mui/material";
 import { useAtomValue } from 'jotai';
 
@@ -19,8 +20,8 @@ import { useFlightLogSummaryManual, userEmailAtom } from '../auth/atoms';
 
 
 
-export default function TopBar({ }) {
 
+export default function TopBar({ }) {
 
     const email = useAtomValue(userEmailAtom);
     const logout = useLogout();
@@ -78,6 +79,7 @@ export default function TopBar({ }) {
                     Logout
                 </Button>
             </Toolbar>
+            {isBusy && <LinearProgress />}
         </AppBar>
     );
 }

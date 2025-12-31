@@ -24,22 +24,22 @@ const HomePage = () => {
 
     const [last12Months, setLas12Months] = useState([]);
     const [yearTotals, setYearTotals] = useState([]);
-
+    const [summary, setSummary] = useState([]);
 
     useEffect(() => {
         if (!stored?.summary) return
 
         setLas12Months(getRollingRows(stored.summary))
         setYearTotals(summarizeByYear(stored.summary))
+        setSummary(stored.summary)
 
-
-
-        console.log("stored?.summary", computeTotals(stored?.summary))
-        console.log("getRollingRows", computeTotals(getRollingRows(stored.summary)))
-        console.log("getYTDRows", computeTotals(getYTDRows(stored.summary)))
 
     }, [stored?.summary])
 
+    useEffect(() => {
+        if (!stored?.lastFlights) return;
+        console.log("stored?.lastFlights", stored?.lastFlights)
+    }, [stored?.lastFlights])
 
 
     if (!isLoggedIn) {
@@ -50,21 +50,16 @@ const HomePage = () => {
 
 
     return (
-        <Box border={0}>
-            <TopBar />
+        <Box>
+            {/* <TopBar /> */}
 
-            <SummaryTable summary={stored.summary} />
+            <SummaryTable summary={summary} />
             <RowsSummaryTable rows={last12Months} title="Last 12 Months" />
             <RowsSummaryTable rows={yearTotals} title="Year Totals" />
 
 
-            {/* <YearlySummaryTable summary={stored.summary} />
-            <LastYearTable summary={stored.summary} />
-            <YearHoursBarChart summary={stored.summary} /> */}
-
             <Box>
                 <pre>{stored ? JSON.stringify(stored, null, 2) : "No data yet. Click Refresh."}</pre>
-
             </Box>
 
         </Box>

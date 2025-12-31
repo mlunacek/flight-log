@@ -6,7 +6,9 @@ import {
   GoogleOAuthProvider
 } from "@react-oauth/google";
 
+import MobileLayout from "@/app/mobile-layout";
 import HomePage from "./pages/home";
+import FlightsPage from "./pages/flights";
 import AboutPage from "./pages/about";
 
 import {
@@ -47,8 +49,11 @@ function App() {
           <ThemeProvider theme={theme}>
 
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<AboutPage />} />
+              <Route element={<MobileLayout />}>
+                <Route path={`${import.meta.env.BASE_URL}`} element={<HomePage />} />
+                <Route path={`${import.meta.env.BASE_URL}flights`} element={<FlightsPage />} />
+                <Route path={`${import.meta.env.BASE_URL}about`} element={<AboutPage />} />
+              </Route>
             </Routes>
 
           </ThemeProvider>
