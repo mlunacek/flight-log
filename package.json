@@ -2,7 +2,7 @@
   "name": "flight-log",
   "homepage": "https://mlunacek.github.io/flight-log/",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.1.4",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -23,6 +23,7 @@
     "jotai": "^2.16.1",
     "jwt-decode": "^4.0.0",
     "react": "^19.2.0",
+    "react-countup": "^6.5.3",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.11.0",
     "styled-components": "^6.1.19"

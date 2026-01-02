@@ -21,6 +21,7 @@ export function SummaryTable({ summary, title = "Summary", }) {
 
     const [total, setTotal] = useState()
     const [ytd, setYtd] = useState()
+    const [lastQuarter, setLastQuarter] = useState()
     const [rolling, setRolling] = useState()
 
     useEffect(() => {
@@ -29,6 +30,7 @@ export function SummaryTable({ summary, title = "Summary", }) {
         setTotal(computeTotals(summary))
         setYtd(computeTotals(getYTDRows(summary)))
         setRolling(computeTotals(getRollingRows(summary)))
+        setLastQuarter(computeTotals(getRollingRows(summary, 3)))
 
     }, [summary])
 
@@ -60,6 +62,18 @@ export function SummaryTable({ summary, title = "Summary", }) {
                     </TableHead>
 
                     <TableBody>
+
+                        {lastQuarter &&
+                            <TableRow>
+                                <TableCell>Last Quarter</TableCell>
+                                <TableCell align="right">
+                                    {lastQuarter.flights}
+                                </TableCell>
+                                <TableCell align="right">
+                                    {lastQuarter.hours}
+                                </TableCell>
+                            </TableRow>
+                        }
 
                         {rolling &&
                             <TableRow>

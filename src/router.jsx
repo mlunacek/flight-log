@@ -6,10 +6,18 @@ import {
   GoogleOAuthProvider
 } from "@react-oauth/google";
 
-import MobileLayout from "@/app/mobile-layout";
-import HomePage from "./pages/home";
+import ResponsiveLayout from "./app/responsiev-layout";
+import AuthGuard from "./app/AuthGuard";
+
 import FlightsPage from "./pages/flights";
 import AboutPage from "./pages/about";
+import SettingsPage from "./pages/settings";
+import SummaryPage from "./pages/summary";
+
+import HomeIcon from "@mui/icons-material/Home";
+import FlightIcon from "@mui/icons-material/Flight";
+import InfoIcon from "@mui/icons-material/Info";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import {
   QueryClientProvider,
@@ -17,7 +25,6 @@ import {
 } from "@tanstack/react-query";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -40,6 +47,15 @@ const theme = createTheme({
   },
 });
 
+
+const navItems = [
+  { label: "Summary", path: "/", icon: <HomeIcon /> },
+  { label: "Flights", path: "/flights", icon: <FlightIcon /> },
+  { label: "About", path: "/about", icon: <InfoIcon /> },
+  { label: "Settings", path: "/settings", icon: <SettingsIcon /> },
+];
+
+
 function App() {
   return (
     <Box>
@@ -49,23 +65,22 @@ function App() {
           <ThemeProvider theme={theme}>
 
             <Routes>
-              <Route element={<MobileLayout />}>
 
-                <Route path={`/`} element={<HomePage />} />
-                <Route path={`/flights`} element={<FlightsPage />} />
-                <Route path={`/about`} element={<AboutPage />} />
+              <Route element={<AuthGuard />}>
+                <Route element={<ResponsiveLayout navItems={navItems} />}>
+                  <Route path="/" element={<SummaryPage />} />
+                  <Route path="/flights" element={<FlightsPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
 
-                {/* <Route path={`${import.meta.env.BASE_URL}`} element={<HomePage />} />
-                <Route path={`${import.meta.env.BASE_URL}flights`} element={<FlightsPage />} />
-                <Route path={`${import.meta.env.BASE_URL}about`} element={<AboutPage />} /> */}
-
+                </Route>
               </Route>
             </Routes>
 
           </ThemeProvider>
         </GoogleOAuthProvider>
       </QueryClientProvider>
-    </Box>
+    </Box >
   );
 }
 

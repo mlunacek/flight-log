@@ -20,8 +20,7 @@ export function RowsSummaryTable({ rows, title }) {
         <Paper
             elevation={2}
             sx={{
-                mx: 1,
-                mt: 1,
+                mt: 2,
                 mb: 2,
                 borderRadius: 3,
                 overflow: "hidden",

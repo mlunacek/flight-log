@@ -9,7 +9,7 @@ const PageContainer = ({ children, maxWidth = 'xlg', padding, backgroundColor = 
             border={0}
             display="flex"
             sx={{
-                minHeight: '100dvh', // fallback: '100vh'
+                // minHeight: '100dvh', // fallback: '100vh'
                 borderBottom: 'none !important',
                 boxShadow: 'none !important',
                 padding: 0,

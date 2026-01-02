@@ -25,6 +25,7 @@ const HomePage = () => {
     const isLoggedIn = useAtomValue(isLoggedInAtom);
 
     const [last12Months, setLas12Months] = useState([]);
+    const [last3Months, setLast3Months] = useState([]);
     const [yearTotals, setYearTotals] = useState([]);
     const [summary, setSummary] = useState([]);
 
@@ -32,6 +33,7 @@ const HomePage = () => {
         if (!stored?.summary) return
 
         setLas12Months(getRollingRows(stored.summary))
+        setLast3Months(getRollingRows(stored.summary, 3))
         setYearTotals(summarizeByYear(stored.summary))
         setSummary(stored.summary)
 

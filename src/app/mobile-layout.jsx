@@ -23,6 +23,7 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PersonIcon from '@mui/icons-material/Person';
 import ParaglidingIcon from '@mui/icons-material/Paragliding';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+import TableChartIcon from '@mui/icons-material/TableChart';
 
 import LinearProgress from "@mui/material/LinearProgress";
 
@@ -43,7 +44,6 @@ export default function MobileLayout() {
 
     const isAbout = pathname === "/about";
     const isLoggedIn = useAtomValue(isLoggedInAtom);
-
 
     const toggleDrawer = (nextOpen) => () => setOpen(nextOpen);
 
@@ -82,7 +82,7 @@ export default function MobileLayout() {
                         <ListItemIcon>
                             <BarChartOutlinedIcon />
                         </ListItemIcon>
-                        <ListItemText primary={"Home"} />
+                        <ListItemText primary={"Summary"} />
                     </ListItemButton>
                 </ListItem>
 
@@ -171,11 +171,26 @@ export default function MobileLayout() {
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
 
-            <AppBar position="fixed">
-                <Toolbar>
+            <AppBar
+                position="fixed"
+                elevation={1}
+                sx={{
+                    backgroundColor: "#fff",
+                    color: "text.primary",
+                }}
+            >
+                <Toolbar
+                    disableGutters
+                    sx={{
+                        minHeight: {
+                            xs: 48,
+                            sm: 48,
+                        },
+                        px: 1,
+                    }}
+                >
                     <IconButton
                         edge="start"
-                        color="inherit"
                         onClick={toggleDrawer(true)}
                         sx={{ mr: 1 }}
                     >
@@ -184,14 +199,14 @@ export default function MobileLayout() {
 
                     <Box sx={{ flexGrow: 1 }} />
 
-                    <Typography variant="subtitle2" noWrap>
-                        {/* {email} */}
+                    <Typography variant="caption" noWrap>
                         v{__APP_VERSION__}
                     </Typography>
                 </Toolbar>
-                {isBusy && <LinearProgress />}
 
+                {isBusy && <LinearProgress />}
             </AppBar>
+
 
             <Drawer
                 anchor="left"

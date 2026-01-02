@@ -20,7 +20,7 @@ export function FlightsBarChart({ rows }) {
 
     return (
 
-        <Box border={0} sx={{ width: "100%", mx: 0, mt: 0 }}>
+        <Box border={0} sx={{ width: "100%", mx: 0, mt: 0, pl: 0, pr: 2 }}>
             <BarChart
                 height={220}
                 colors={["#1976d2", "#90caf9"]}
@@ -36,7 +36,7 @@ export function FlightsBarChart({ rows }) {
                     data: hours,
                 }]}
                 series={[{ data: hours }]}
-                margin={{ top: 10, right: 0, bottom: 22, left: 0 }}
+                margin={{ top: 10, right: 5, bottom: 22, left: 5 }}
                 slotProps={{ legend: { hidden: true } }}
             />
         </Box>
